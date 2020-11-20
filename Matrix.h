@@ -1,5 +1,7 @@
 #include "Node.h"
 #include <iostream>
+#include <string>
+#include <fstream>
 
 class Matrix {
     private:
@@ -8,6 +10,7 @@ class Matrix {
         int cols;
 
     public:
+        void read(std::string fileName);
         bool isEmpty();
         void print();
         bool canBeAdded(Matrix other);

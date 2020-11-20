@@ -5,5 +5,7 @@ class Node {
     int row;
     Node* next;
 
+    Node::Node(int value, int row, int col);
+
     friend class Matrix;
 };
