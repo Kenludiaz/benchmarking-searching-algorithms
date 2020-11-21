@@ -32,6 +32,8 @@ void Matrix::read(std::string fileName, int row, int col) {
 }
 
 
+
+
 bool Matrix::isEmpty() {
     if (!this->first) {
         return true;
@@ -54,4 +56,18 @@ void Matrix::print() {
         }
         std::cout << std::endl;
     }
+}
+
+bool Matrix::canBeAdded(Matrix other){
+    if (this->rows == other->rows && this->cols == other->cols){
+        return true;
+    }
+    return false;
+}
+
+bool Matrix::canBeMultiplied(Matrix other){
+    if (this->cols == other->rows){
+        return true;
+    }
+    return false;
 }
