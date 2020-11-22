@@ -13,8 +13,9 @@ class Matrix {
         void read(std::string fileName, int row, int col);
         bool isEmpty();
         void print();
-        bool canBeAdded(Matrix other);
-        Matrix add(Matrix other);
-        bool canBeMultiplied(Matrix other);
-        Matrix multiply(Matrix multiply);
+        bool canBeAdded(Matrix& other);
+        Matrix add(Matrix& other);
+        bool canBeMultiplied(Matrix& other);
+        Matrix multiply(Matrix& multiply);
+        void destroyNodes();
 };

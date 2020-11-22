@@ -58,14 +58,14 @@ void Matrix::print() {
     }
 }
 
-bool Matrix::canBeAdded(Matrix other){
+bool Matrix::canBeAdded(Matrix& other){
     if (this->rows == other.rows && this->cols == other.cols){
         return true;
     }
     return false;
 }
 
-bool Matrix::canBeMultiplied(Matrix other){
+bool Matrix::canBeMultiplied(Matrix& other){
     if (this->cols == other.rows){
         return true;
     }
