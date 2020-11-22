@@ -68,6 +68,10 @@ bool Matrix::canBeMultiplied(Matrix& other){
     return false;
 }
 
+Matrix::~Matrix() {
+    this->destroyNodes();
+}
+
 void Matrix::destroyNodes() {
     Node* iterator = this->first;
     int i =1;

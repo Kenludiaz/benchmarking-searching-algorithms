@@ -10,6 +10,7 @@ class Matrix {
         int cols;
 
     public:
+        ~Matrix();
         void read(std::string fileName, int row, int col);
         bool isEmpty();
         void print();
