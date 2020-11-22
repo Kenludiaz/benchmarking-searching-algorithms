@@ -6,13 +6,11 @@ void Matrix::read(std::string fileName, int row, int col) {
     this->rows = row;
     this->cols = col;
 
-
     int value = 0;
     Node *temp = nullptr;
     this->first = nullptr;
     for(int i =0; i < row; i++){
         for(int j = 0; j < col; j++){
-            std::cout << i << " "<< j << std::endl;
             file >> value;
             if(value != 0){
                 Node *node = new Node(value, i, j);
@@ -31,15 +29,13 @@ void Matrix::read(std::string fileName, int row, int col) {
     file.close();
 }
 
-
-
-
 bool Matrix::isEmpty() {
     if (!this->first) {
         return true;
     }
     return false;
 }
+
 void Matrix::print() {
     Node *temp = this->first;
     for(int i = 0; i < this->rows; i++){
@@ -70,4 +66,17 @@ bool Matrix::canBeMultiplied(Matrix& other){
         return true;
     }
     return false;
+}
+
+void Matrix::destroyNodes() {
+    Node* iterator = this->first;
+    int i =1;
+    while (iterator) {
+        Node* next = iterator->next;
+        delete iterator;
+        iterator = next;
+        if (iterator == nullptr) {
+            break;
+        }
+    }
 }
