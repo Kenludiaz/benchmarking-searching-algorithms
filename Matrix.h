@@ -10,8 +10,10 @@ class Matrix {
         int cols;
 
     public:
+        Matrix(int rows, int cols);
+
         ~Matrix();
-        void read(std::string fileName, int row, int col);
+        void read(std::string fileName);
         bool isEmpty();
         void print();
         bool canBeAdded(Matrix& other);

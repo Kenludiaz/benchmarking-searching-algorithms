@@ -1,16 +1,19 @@
 #include "Matrix.h"
 
-void Matrix::read(std::string fileName, int row, int col) {
+Matrix::Matrix(int rows, int cols) {
+    this->rows = rows;
+    this->cols = cols;
+}
+
+void Matrix::read(std::string fileName) {
     std::ifstream file;
     file.open(fileName);
-    this->rows = row;
-    this->cols = col;
 
     int value = 0;
     Node *temp = nullptr;
     this->first = nullptr;
-    for(int i =0; i < row; i++){
-        for(int j = 0; j < col; j++){
+    for(int i =0; i < this->rows; i++){
+        for(int j = 0; j < this->cols; j++){
             file >> value;
             if(value != 0){
                 Node *node = new Node(value, i, j);
