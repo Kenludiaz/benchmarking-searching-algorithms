@@ -3,8 +3,8 @@
 int main() {
     Matrix test1(3, 4);
     test1.read("sample.txt");
-    Matrix test2(3, 3);
-    test2.read("sample.txt");
+    Matrix test2(3, 4);
+    // test2.read("sample.txt");
     
 
     // std::cout << "This matrix is empty: " << test.isEmpty()

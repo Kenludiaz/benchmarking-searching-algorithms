@@ -3,6 +3,7 @@
 Matrix::Matrix(int rows, int cols) {
     this->rows = rows;
     this->cols = cols;
+    this->first = nullptr;
 }
 
 void Matrix::read(std::string fileName) {
@@ -11,7 +12,6 @@ void Matrix::read(std::string fileName) {
 
     int value = 0;
     Node *temp = nullptr;
-    this->first = nullptr;
 
     for(int i =0; i < this->rows; i++){
         for(int j = 0; j < this->cols; j++){
