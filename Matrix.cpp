@@ -60,20 +60,59 @@ void Matrix::print() {
         std::cout << std::endl;
     }
 }
+Matrix Matrix::add(Matrix& other) {
+    if(!this->canBeAdded(other)) {
+        std::cout << "[INVALID] This matrixes can not be added." << std::endl;
+        std::exit(1);
+    }
+    Matrix* result = new Matrix(this->rows, this->cols);
+    return (*result);
+}
+
 
 bool Matrix::canBeAdded(Matrix& other){
-    if (this->rows == other.rows && this->cols == other.cols){
+    if (this->isEmpty() || other.isEmpty()) {
+        std::cout << "[INVALID] One of these matrixes is empty." << std::endl;
+        return false;
+    } else if(this->rows == other.rows && this->cols == other.cols) {
         return true;
+    } else {
+        return false;
     }
-    return false;
+}
+void Matrix::deepCopy(Matrix& result) {
+    Node* resultItr = nullptr;
+    Node* currentItr = this->first;
+    bool firstIteration = true;
+
+    while (currentItr) {
+        Node* newNode = new Node(currentItr->value, 
+                                 currentItr->row, 
+                                 currentItr->col);
+
+        if (firstIteration) {
+            result.first = newNode;
+            resultItr = newNode;
+            firstIteration = false;
+        } else {
+            resultItr->next = newNode;
+            resultItr = resultItr->next;
+        }
+
+        currentItr = currentItr->next;
+    }
 }
 
 
 bool Matrix::canBeMultiplied(Matrix& other){
-    if (this->cols == other.rows){
+    if (this->isEmpty() || other.isEmpty()) {
+        std::cout << "[INVALID] One of these matrixes is empty." << std::endl;
+        return false;
+    } else if (this->cols == other.rows){
         return true;
+    } else {
+        return false;
     }
-    return false;
 }
 
 Matrix::~Matrix() {

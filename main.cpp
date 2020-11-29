@@ -3,7 +3,7 @@
 int main() {
     Matrix test1(3, 4);
     test1.read("sample.txt");
-    Matrix test2(3, 2);
+    Matrix test2(3, 3);
     test2.read("sample.txt");
     
 
@@ -13,5 +13,6 @@ int main() {
     // << std::endl;
     // std::cout << "This matrix can be multipied: " << test1.canBeMultiplied(test2)
     // << std::endl;
+    test1.add(test2);
 
 }

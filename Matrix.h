@@ -11,11 +11,12 @@ class Matrix {
         bool canBeAdded(Matrix& other);
         bool canBeMultiplied(Matrix& other);
         void destroyNodes();
+        void deepCopy(Matrix& result);
 
     public:
         Matrix(int rows, int cols);
-
         ~Matrix();
+
         void read(std::string fileName);
         bool isEmpty();
         void print();
