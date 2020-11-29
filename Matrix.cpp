@@ -68,6 +68,7 @@ bool Matrix::canBeAdded(Matrix& other){
     return false;
 }
 
+
 bool Matrix::canBeMultiplied(Matrix& other){
     if (this->cols == other.rows){
         return true;

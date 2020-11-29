@@ -8,6 +8,9 @@ class Matrix {
         Node* first;
         int rows;
         int cols;
+        bool canBeAdded(Matrix& other);
+        bool canBeMultiplied(Matrix& other);
+        void destroyNodes();
 
     public:
         Matrix(int rows, int cols);
@@ -16,9 +19,6 @@ class Matrix {
         void read(std::string fileName);
         bool isEmpty();
         void print();
-        bool canBeAdded(Matrix& other);
         Matrix add(Matrix& other);
-        bool canBeMultiplied(Matrix& other);
         Matrix multiply(Matrix& multiply);
-        void destroyNodes();
 };
