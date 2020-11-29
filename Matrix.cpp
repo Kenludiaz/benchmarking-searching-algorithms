@@ -12,6 +12,7 @@ void Matrix::read(std::string fileName) {
     int value = 0;
     Node *temp = nullptr;
     this->first = nullptr;
+
     for(int i =0; i < this->rows; i++){
         for(int j = 0; j < this->cols; j++){
             file >> value;
@@ -22,7 +23,6 @@ void Matrix::read(std::string fileName) {
                     temp = node;
                 }
                 else{
-
                     temp->next = node;
                     temp = temp->next;
                 }
@@ -40,6 +40,10 @@ bool Matrix::isEmpty() {
 }
 
 void Matrix::print() {
+    if (this->isEmpty()) {
+        std::cout << "[INVALID] This matrix is empty." << std::endl;
+        return;
+    }
     Node *temp = this->first;
     for(int i = 0; i < this->rows; i++){
         for(int j = 0; j < this->cols; j++){
