@@ -4,6 +4,7 @@ class Node {
     int col;
     int row;
     Node* next;
+    Node* previous;
 
     Node(int value, int row, int col);
     bool areNull(Node* other);

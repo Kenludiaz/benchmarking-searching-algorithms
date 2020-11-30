@@ -5,6 +5,7 @@ Node::Node(int value, int row, int col) {
     this->row = row;
     this->col = col;
     this->next = nullptr;
+    this->previous = nullptr;
 }
 bool Node::areNull(Node* other) {
     if (this == nullptr ||

@@ -24,6 +24,7 @@ void Matrix::read(std::string fileName) {
                 }
                 else{
                     temp->next = node;
+                    temp->previous = temp;
                     temp = temp->next;
                 }
             }
@@ -73,11 +74,13 @@ Matrix Matrix::add(Matrix& other) {
 
     Node* resultIterator = result->first;
     Node* otherIterator = other.first;
-    while(otherIterator) {
-        if (otherIterator->isBehind(resultIterator)) {
+    // while(otherIterator) {
+    //     if (resultIterator == nullptr) {
 
-        } else if (otherIterator->isTied())
-    }
+    //     } else if (otherIterator->isBehind(resultIterator)) {
+
+    //     } else if (otherIterator->isTied())
+    // }
 
     return (*result);
 }
