@@ -6,9 +6,19 @@ Node::Node(int value, int row, int col) {
     this->col = col;
     this->next = nullptr;
 }
+bool Node::areNull(Node* other) {
+    if (this == nullptr ||
+        other == nullptr) {
+            return true;
+        }
+    return false;
+}
 
 bool Node::isBehind(Node* other) {
-    if (this->row < other->row  ||
+    if (this == nullptr ||
+        other == nullptr) {
+            return false;
+        } else if (this->row < other->row  ||
         (this->row == other->row &&
         this->col < other->col)) {
             return true;
@@ -17,7 +27,10 @@ bool Node::isBehind(Node* other) {
 }
 
 bool Node::isTied(Node* other) {
-    if (this->row == other->row &&
+    if (this == nullptr ||
+        other == nullptr) {
+            return false;
+        } else if (this->row == other->row &&
         other->col == this->col) {
             return true;
         }

@@ -71,6 +71,14 @@ Matrix Matrix::add(Matrix& other) {
     Matrix* result = new Matrix(this->rows, this->cols);
     this->deepCopy(*(result));
 
+    Node* resultIterator = result->first;
+    Node* otherIterator = other.first;
+    while(otherIterator) {
+        if (otherIterator->isBehind(resultIterator)) {
+
+        } else if (otherIterator->isTied())
+    }
+
     return (*result);
 }
 
