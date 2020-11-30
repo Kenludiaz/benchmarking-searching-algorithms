@@ -66,6 +66,7 @@ Matrix Matrix::add(Matrix& other) {
         std::exit(1);
     }
     Matrix* result = new Matrix(this->rows, this->cols);
+    this->deepCopy(*(result));
     return (*result);
 }
 

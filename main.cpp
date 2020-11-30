@@ -4,7 +4,7 @@ int main() {
     Matrix test1(3, 4);
     test1.read("sample.txt");
     Matrix test2(3, 4);
-    // test2.read("sample.txt");
+    test2.read("sample.txt");
     
 
     // std::cout << "This matrix is empty: " << test.isEmpty()
@@ -13,6 +13,6 @@ int main() {
     // << std::endl;
     // std::cout << "This matrix can be multipied: " << test1.canBeMultiplied(test2)
     // << std::endl;
-    test1.add(test2);
+    test1.add(test2).print();
 
 }
