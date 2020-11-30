@@ -73,14 +73,22 @@ Matrix Matrix::add(Matrix& other) {
     this->deepCopy(*(result));
 
     Node* resultIterator = result->first;
-    Node* otherIterator = other.first;
-    // while(otherIterator) {
-    //     if (resultIterator == nullptr) {
+    Node* currentIterator = other.first;
+    while(currentIterator) {
+        if (resultIterator == nullptr) {
+            Node* newNode = new Node(currentIterator->value, 
+                                     currentIterator->row,
+                                     currentIterator->col);
+            Node* previous = resultIterator->previous;
+            previous->next = newNode;
+            newNode->previous = previous;
+            resultIterator = newNode;
+            currentIterator = currentIterator->next;
 
-    //     } else if (otherIterator->isBehind(resultIterator)) {
+        } else if (currentIterator->isBehind(resultIterator)) {
 
-    //     } else if (otherIterator->isTied())
-    // }
+        } else if (currentIterator->isTied())
+    }
 
     return (*result);
 }
