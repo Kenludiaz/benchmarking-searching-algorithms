@@ -62,11 +62,15 @@ void Matrix::print() {
 }
 Matrix Matrix::add(Matrix& other) {
     if(!this->canBeAdded(other)) {
-        std::cout << "[INVALID] This matrixes can not be added." << std::endl;
+        std::cout << "[INVALID] These matrixes can not be added." << std::endl;
         std::exit(1);
     }
+    //A copy is taken from the first matrix because every value
+    //in the resulting matrix will be equivalent until the second
+    //matrix has been iterated upon.
     Matrix* result = new Matrix(this->rows, this->cols);
     this->deepCopy(*(result));
+
     return (*result);
 }
 

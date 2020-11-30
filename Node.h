@@ -6,6 +6,8 @@ class Node {
     Node* next;
 
     Node(int value, int row, int col);
+    bool isBehind(Node* other);
+    bool isTied(Node* other);
 
     friend class Matrix;
 };
