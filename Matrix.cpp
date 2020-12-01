@@ -75,7 +75,7 @@ Matrix Matrix::add(Matrix& other) {
     Node* resultIterator = result->first;
     Node* currentIterator = other.first;
     while(currentIterator) {
-        if (resultIterator == nullptr) {
+        if (!resultIterator) {
             Node* newNode = new Node(currentIterator->value, 
                                      currentIterator->row,
                                      currentIterator->col);
@@ -86,8 +86,31 @@ Matrix Matrix::add(Matrix& other) {
             currentIterator = currentIterator->next;
 
         } else if (currentIterator->isBehind(resultIterator)) {
-
-        } else if (currentIterator->isTied())
+            Node* newNode = new Node(currentIterator->value, 
+                                     currentIterator->row,
+                                     currentIterator->col);
+            if (resultIterator == result->first) {
+                Node* temp = resultIterator;
+                result->first = newNode;
+                newNode->next = temp;
+                temp->previous = newNode;
+            } else {
+                Node* temp = resultIterator;
+                resultIterator->previous->next = newNode;
+                newNode->previous = resultIterator->previous;
+                resultIterator->previous = newNode;
+                newNode->next = resultIterator;
+            }
+            currentIterator = currentIterator->next;
+        } else if (currentIterator->isTied(resultIterator)) {
+            resultIterator->value += currentIterator->value;
+            resultIterator = resultIterator->next;
+            currentIterator = currentIterator->next;
+        } else if (resultIterator->isBehind(currentIterator)) {
+            resultIterator = resultIterator->next;
+        }
+        result->print();
+        std::cout << "========================================" << std::endl;
     }
 
     return (*result);
