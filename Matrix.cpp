@@ -122,44 +122,42 @@ Matrix Matrix::multiply(Matrix& multiply){
     Matrix* result = new Matrix(this->rows, multiply.cols);
     Node *resultIterator = result->first;
 
-    // std::cout<< this->rows << std::endl;
-    // std::cout<< multiply.cols << std::endl;
-
+    // 2 pointer fucntion to trace the linked list
     Node *temp1 = this->first;
     Node *temp2 = multiply.first;
+    
+    // the size of the matrix should be row of the first matrix by the col of the secound matrix
     for(int i = 0; i < this->rows; i++){
-        std::cout << "row"<< i << std::endl;
         for(int j = 0; j < multiply.cols; j++){
-            std::cout << "col"<<j << std::endl;
+            //Loop till row == i
             while(temp1->row != i){
-                std::cout << "step1" << std::endl;
                 temp1 = temp1->next;
             }
-            std::cout << "temp1 row = " << temp1->row << std::endl;
             int value = 0;
+            //runs if temp1 and temp 2 is not null and temp1 row == i
             while(temp1 != nullptr && temp2 != nullptr && temp1->row == i){
+                //if temp2 col is not equal to j move to the next node
                 if(temp2->col != j){
-                    std::cout << "step2" << std::endl;
                     temp2 = temp2->next;
                 }
+                //if temp1 col is not equal to temp2 row shift temp1 or temp2 to next node
                 else if(temp1->col != temp2->row){
-                    std::cout << temp1->row << temp1->col<< std::endl;
-                    std::cout << temp1->value << std::endl;
-                    std::cout << temp2->row << temp2-> col<< std::endl;
-                    std::cout << temp2->value << std::endl;
-                    std::cout << "step3" << std::endl;
-                    temp1 = temp1->next;
-                    temp2 = temp2->next;
+                    if(temp1->next != nullptr)
+                        temp1 = temp1->next;
+                    }
+                    else{
+                         temp2 = temp2->next;
+                    }
+
                 }
+                //once all the conditon is meet add value of temp1*temp2 to value holder, then shift both node to the next
                 else{
-                    std::cout<< temp2->row << "," << temp2->col<< std::endl;
-                    std::cout<< temp1->row << "," << temp1->col<< std::endl;
                     value += temp1->value * temp2->value;
-                    std::cout<< temp1->value <<"+" << temp2->value<< "=" << value << std::endl;
                     temp1 = temp1->next;
                     temp2 = temp2->next;
                 }
             }
+            //if value is not 0 create a new node
             if(value != 0){
                 Node* newNode = new Node(value, i, j);
                 if(resultIterator == nullptr){
@@ -173,10 +171,12 @@ Matrix Matrix::multiply(Matrix& multiply){
                     resultIterator = resultIterator->next;
                 }
             }
+            // reset the pointers
             temp1 = this->first;
             temp2 = multiply.first;
         }
     }
+    //print the matrix
     result->print();
     std::cout << "========================================" << std::endl;
     return(*result);
