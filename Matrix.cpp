@@ -1,35 +1,3 @@
-Skip to content
-Search or jump to…
-
-Pull requests
-Issues
-Marketplace
-Explore
-
-@jbinwu39
-Kenludiaz
-/
-sparse-matricies-linked-lists
-1
-0
-0
-Code
-Issues
-Pull requests
-Actions
-Projects
-Wiki
-Security
-Insights
-sparse-matricies-linked-lists/Matrix.cpp
-@Kenludiaz
-Kenludiaz Adds statement to create nodes in result matrix
-Latest commit 3ca8291 5 hours ago
- History
- 2 contributors
-@Kenludiaz@jbinwu39
-157 lines (138 sloc)  4.08 KB
-
 #include "Matrix.h"
 
 Matrix::Matrix(int rows, int cols) {
@@ -93,128 +61,128 @@ void Matrix::print() {
         std::cout << std::endl;
     }
 }
-<<<<<<< Updated upstream
-Matrix Matrix::add(Matrix& other) {
-    if(!this->canBeAdded(other)) {
-        std::cout << "[INVALID] These matrixes can not be added." << std::endl;
-        std::exit(1);
-    }
-    //A copy is taken from the first matrix because every value
-    //in the resulting matrix will be equivalent until the second
-    //matrix has been iterated upon.
-    Matrix* result = new Matrix(this->rows, this->cols);
-    this->deepCopy(*(result));
 
-    Node* resultIterator = result->first;
-    Node* currentIterator = other.first;
-    while(currentIterator) {
-        if (!resultIterator) {
-            Node* newNode = new Node(currentIterator->value, 
-                                     currentIterator->row,
-                                     currentIterator->col);
-            Node* previous = resultIterator->previous;
-            previous->next = newNode;
-            newNode->previous = previous;
-            resultIterator = newNode;
-            currentIterator = currentIterator->next;
+// Matrix Matrix::add(Matrix& other) {
+//     if(!this->canBeAdded(other)) {
+//         std::cout << "[INVALID] These matrixes can not be added." << std::endl;
+//         std::exit(1);
+//     }
+//     //A copy is taken from the first matrix because every value
+//     //in the resulting matrix will be equivalent until the second
+//     //matrix has been iterated upon.
+//     Matrix* result = new Matrix(this->rows, this->cols);
+//     this->deepCopy(*(result));
 
-        } else if (currentIterator->isBehind(resultIterator)) {
-            Node* newNode = new Node(currentIterator->value, 
-                                     currentIterator->row,
-                                     currentIterator->col);
-            if (resultIterator == result->first) {
-                Node* temp = resultIterator;
-                result->first = newNode;
-                newNode->next = temp;
-                temp->previous = newNode;
-            } else {
-                Node* temp = resultIterator;
-                resultIterator->previous->next = newNode;
-                newNode->previous = resultIterator->previous;
-                resultIterator->previous = newNode;
-                newNode->next = resultIterator;
-            }
-            currentIterator = currentIterator->next;
-        } else if (currentIterator->isTied(resultIterator)) {
-            resultIterator->value += currentIterator->value;
-            resultIterator = resultIterator->next;
-            currentIterator = currentIterator->next;
-        } else if (resultIterator->isBehind(currentIterator)) {
-            resultIterator = resultIterator->next;
-        }
-        result->print();
-        std::cout << "========================================" << std::endl;
-    }
+//     Node* resultIterator = result->first;
+//     Node* currentIterator = other.first;
+//     while(currentIterator) {
+//         if (!resultIterator) {
+//             Node* newNode = new Node(currentIterator->value,
+//                                      currentIterator->row,
+//                                      currentIterator->col);
+//             Node* previous = resultIterator->previous;
+//             previous->next = newNode;
+//             newNode->previous = previous;
+//             resultIterator = newNode;
+//             currentIterator = currentIterator->next;
 
-=======
+//         } else if (currentIterator->isBehind(resultIterator)) {
+//             Node* newNode = new Node(currentIterator->value,
+//                                      currentIterator->row,
+//                                      currentIterator->col);
+//             if (resultIterator == result->first) {
+//                 Node* temp = resultIterator;
+//                 result->first = newNode;
+//                 newNode->next = temp;
+//                 temp->previous = newNode;
+//             } else {
+//                 Node* temp = resultIterator;
+//                 resultIterator->previous->next = newNode;
+//                 newNode->previous = resultIterator->previous;
+//                 resultIterator->previous = newNode;
+//                 newNode->next = resultIterator;
+//             }
+//             currentIterator = currentIterator->next;
+//         } else if (currentIterator->isTied(resultIterator)) {
+//             resultIterator->value += currentIterator->value;
+//             resultIterator = resultIterator->next;
+//             currentIterator = currentIterator->next;
+//         } else if (resultIterator->isBehind(currentIterator)) {
+//             resultIterator = resultIterator->next;
+//         }
+//         result->print();
+//         std::cout << "========================================" << std::endl;
+// }
+
 Matrix Matrix::multiply(Matrix& multiply){
     if(!this->canBeMultiplied(multiply)){
         std::cout << "[INVALID] These matrixes can not be multiply." << std::endl;
         std::exit(1);
     }
-    int counter = 0;
+    Matrix* result = new Matrix(this->rows, multiply.cols);
+    Node *resultIterator = result->first;
+
+    // std::cout<< this->rows << std::endl;
+    // std::cout<< multiply.cols << std::endl;
+
+    Node *temp1 = this->first;
+    Node *temp2 = multiply.first;
     for(int i = 0; i < this->rows; i++){
-        node *temp1 = this->first;
-        node *temp2 = multiply.first;
-        for(int j = 0; j <multiply.rows; j++){
+        std::cout << "row"<< i << std::endl;
+        for(int j = 0; j < multiply.cols; j++){
+            std::cout << "col"<<j << std::endl;
+            while(temp1->row != i){
+                std::cout << "step1" << std::endl;
+                temp1 = temp1->next;
+            }
+            std::cout << "temp1 row = " << temp1->row << std::endl;
             int value = 0;
-            while(temp1->next != nullptr || temp1->next != nullptr){
-                if(temp->rows = i && multiply.cols = j){
-                    value += this->value * multiply.value;
+            while(temp1 != nullptr && temp2 != nullptr && temp1->row == i){
+                if(temp2->col != j){
+                    std::cout << "step2" << std::endl;
+                    temp2 = temp2->next;
+                }
+                else if(temp1->col != temp2->row){
+                    std::cout << temp1->row << temp1->col<< std::endl;
+                    std::cout << temp1->value << std::endl;
+                    std::cout << temp2->row << temp2-> col<< std::endl;
+                    std::cout << temp2->value << std::endl;
+                    std::cout << "step3" << std::endl;
                     temp1 = temp1->next;
                     temp2 = temp2->next;
                 }
                 else{
+                    std::cout<< temp2->row << "," << temp2->col<< std::endl;
+                    std::cout<< temp1->row << "," << temp1->col<< std::endl;
+                    value += temp1->value * temp2->value;
+                    std::cout<< temp1->value <<"+" << temp2->value<< "=" << value << std::endl;
                     temp1 = temp1->next;
                     temp2 = temp2->next;
                 }
             }
-            Node* newNode = new(value, i, j);
-            node *temp1 = this->first;
-            node *temp2 = multiply.first;
+            if(value != 0){
+                Node* newNode = new Node(value, i, j);
+                if(resultIterator == nullptr){
+                    result->first = newNode;
+                    resultIterator = result->first;
+                }
+                else{
+                    Node* temp = resultIterator;
+                    resultIterator->next = newNode;
+                    resultIterator->previous = temp;
+                    resultIterator = resultIterator->next;
+                }
+            }
+            temp1 = this->first;
+            temp2 = multiply.first;
         }
     }
+    result->print();
+    std::cout << "========================================" << std::endl;
+    return(*result);
 }
 
 
-Matrix Matrix::add(Matrix& other) {
-    if(!this->canBeAdded(other)) {
-        std::cout << "[INVALID] These matrixes can not be added." << std::endl;
-        std::exit(1);
-    }
-    //A copy is taken from the first matrix because every value
-    //in the resulting matrix will be equivalent until the second
-    //matrix has been iterated upon.
-    Matrix* result = new Matrix(this->rows, this->cols);
-    this->deepCopy(*(result));
-
-    Node* resultIterator = result->first;
-    Node* currentIterator = other.first;
-    while(currentIterator) {
-        if (resultIterator == nullptr) {
-            Node* newNode = new Node(currentIterator->value,
-                                     currentIterator->row,
-                                     currentIterator->col);
-            Node* previous = resultIterator->previous;
-            previous->next = newNode;
-            newNode->previous = previous;
-            resultIterator = newNode;
-            currentIterator = currentIterator->next;
-
-        } else if (currentIterator->isBehind(resultIterator)) {
-
-        } else if (currentIterator->isTied())
-    }
-
->>>>>>> Stashed changes
-    return (*result);
-}
-
-
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
 bool Matrix::canBeAdded(Matrix& other){
     if (this->isEmpty() || other.isEmpty()) {
         std::cout << "[INVALID] One of these matrixes is empty." << std::endl;
@@ -225,38 +193,36 @@ bool Matrix::canBeAdded(Matrix& other){
         return false;
     }
 }
-<<<<<<< Updated upstream
-=======
 
 
->>>>>>> Stashed changes
-void Matrix::deepCopy(Matrix& result) {
-    Node* resultItr = nullptr;
-    Node* currentItr = this->first;
-    bool firstIteration = true;
 
-    while (currentItr) {
-<<<<<<< Updated upstream
-        Node* newNode = new Node(currentItr->value, 
-                                 currentItr->row, 
-=======
-        Node* newNode = new Node(currentItr->value,
-                                 currentItr->row,
->>>>>>> Stashed changes
-                                 currentItr->col);
 
-        if (firstIteration) {
-            result.first = newNode;
-            resultItr = newNode;
-            firstIteration = false;
-        } else {
-            resultItr->next = newNode;
-            resultItr = resultItr->next;
-        }
+// void Matrix::deepCopy(Matrix& result) {
+//     Node* resultItr = nullptr;
+//     Node* currentItr = this->first;
+//     bool firstIteration = true;
 
-        currentItr = currentItr->next;
-    }
-}
+//     while (currentItr) {
+
+//         Node* newNode = new Node(currentItr->value,
+//                                  currentItr->row,
+
+//         Node* newNode = new Node(currentItr->value,
+//                                  currentItr->row,
+//                                  currentItr->col);
+
+//         if (firstIteration) {
+//             result.first = newNode;
+//             resultItr = newNode;
+//             firstIteration = false;
+//         } else {
+//             resultItr->next = newNode;
+//             resultItr = resultItr->next;
+//         }
+
+//         currentItr = currentItr->next;
+//     }
+// }
 
 
 bool Matrix::canBeMultiplied(Matrix& other){
