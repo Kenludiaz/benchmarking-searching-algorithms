@@ -12,6 +12,9 @@ class Matrix {
         bool canBeMultiplied(Matrix& other);
         void destroyNodes();
         void deepCopy(Matrix& result);
+        void next(Node* iterator);
+        bool isHead(Node* iterator);
+        
 
     public:
         Matrix(int rows, int cols);

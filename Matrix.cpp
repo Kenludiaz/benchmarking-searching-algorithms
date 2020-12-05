@@ -80,16 +80,15 @@ Matrix Matrix::add(Matrix& other) {
                                      currentIterator->row,
                                      currentIterator->col);
             Node* previous = resultIterator->previous;
-            previous->next = newNode;
-            newNode->previous = previous;
-            resultIterator = newNode;
-            currentIterator = currentIterator->next;
+            previous->insertAhead(newNode);
+            this->next(currentIterator);
+            this->next(resultIterator);
 
         } else if (currentIterator->isBehind(resultIterator)) {
             Node* newNode = new Node(currentIterator->value, 
                                      currentIterator->row,
                                      currentIterator->col);
-            if (resultIterator == result->first) {
+            if (result->isHead(resultIterator)) {
                 Node* temp = resultIterator;
                 result->first = newNode;
                 newNode->next = temp;
@@ -160,6 +159,15 @@ bool Matrix::canBeMultiplied(Matrix& other){
     } else {
         return false;
     }
+}
+void Matrix::next(Node* iterator) {
+    iterator = iterator->next;
+}
+bool Matrix::isHead(Node* iterator) {
+    if (iterator == this->first) {
+        return true;
+    } 
+    return false;
 }
 
 Matrix::~Matrix() {

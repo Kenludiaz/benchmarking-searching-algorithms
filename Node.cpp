@@ -37,3 +37,7 @@ bool Node::isTied(Node* other) {
         }
     return false;
 }
+void Node::insertAhead(Node* newNode) {
+    this->next = newNode;
+    newNode->previous = this;
+}

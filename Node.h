@@ -10,6 +10,7 @@ class Node {
     bool areNull(Node* other);
     bool isBehind(Node* other);
     bool isTied(Node* other);
+    void insertAhead(Node* newNode);
 
     friend class Matrix;
 };
