@@ -76,11 +76,11 @@ Matrix Matrix::add(Matrix& other) {
     Node* currentIterator = other.first;
     while(currentIterator) {
         if (!resultIterator) {
-            Node* newNode = new Node(currentIterator->value, 
-                                     currentIterator->row,
-                                     currentIterator->col);
-            Node* previous = resultIterator->previous;
-            previous->insertAhead(newNode);
+            // When the first Matrix has no more nodes
+            // Then you will alwaysneed to
+            // add the remaining Nodes
+            // From the second Matrix
+            this->pushBack(resultIterator, currentIterator);
             this->next(currentIterator);
             this->next(resultIterator);
 
@@ -168,6 +168,14 @@ bool Matrix::isHead(Node* iterator) {
         return true;
     } 
     return false;
+}
+void Matrix::pushBack(Node* thisIterator, Node* otherIterator) {
+    // Assertion thisIterator = NULL
+    Node* newNode = new Node(otherIterator->value, 
+                                otherIterator->row,
+                                otherIterator->col);
+    Node* previous = thisIterator->previous;
+    previous->insertAhead(newNode);
 }
 
 Matrix::~Matrix() {

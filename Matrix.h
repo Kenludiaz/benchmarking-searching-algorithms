@@ -14,7 +14,7 @@ class Matrix {
         void deepCopy(Matrix& result);
         void next(Node* iterator);
         bool isHead(Node* iterator);
-        
+        void pushBack(Node* thisIterator, Node* newNode);
 
     public:
         Matrix(int rows, int cols);
