@@ -74,37 +74,42 @@ Matrix Matrix::add(Matrix& other) {
     Matrix* result = new Matrix(this->rows, this->cols);
     this->deepCopy(*(result));
 
-    Node* resultIterator = result->first;
-    Node* currentIterator = other.first;
-    while(currentIterator) {
-        if (!resultIterator) {
+    while(other.iterator) {
+        if ((result->iterator) == nullptr) {
             // When the first Matrix has no more nodes
             // Then you will always need to
             // add the remaining Nodes from the second Matrix
-
-            this->pushBack(resultIterator, currentIterator);
-            this->next(currentIterator);
-            this->next(resultIterator);
-        } else if (currentIterator->isBehind(resultIterator)) {
-            Node* newNode = new Node(currentIterator->value, 
-                                     currentIterator->row,
-                                     currentIterator->col);
-            if (result->isHead(resultIterator)) {
-                result->pushFront(resultIterator, currentIterator, newNode);
+            Node* newNode = new Node(other.iterator->value, 
+                            other.iterator->row,
+                            other.iterator->col);
+            result->pushBack(newNode);
+            std::cout << other.iterator->value << std::endl;
+            other.next();
+            result->next();
+        } else if (other.iterator->isBehind(result->iterator)) {
+            Node* newNode = new Node(other.iterator->value, 
+                                     other.iterator->row,
+                                     other.iterator->col);
+            if (result->itrAtHead()) {
+                result->pushFront(newNode);
             } else {
-                Node* temp = resultIterator;
-                resultIterator->previous->next = newNode;
-                newNode->previous = resultIterator->previous;
-                resultIterator->previous = newNode;
-                newNode->next = resultIterator;
+                Node* temp = result->iterator;
+                result->iterator->previous->next = newNode;
+                newNode->previous = result->iterator->previous;
+                result->iterator->previous = newNode;
+                newNode->next = result->iterator;
             }
-            currentIterator = currentIterator->next;
-        } else if (currentIterator->isTied(resultIterator)) {
-            resultIterator->value += currentIterator->value;
-            resultIterator = resultIterator->next;
-            currentIterator = currentIterator->next;
-        } else if (resultIterator->isBehind(currentIterator)) {
-            resultIterator = resultIterator->next;
+            other.next();
+        } else if (other.iterator->isTied(result->iterator)) {
+            result->iterator->value += other.iterator->value;
+            result->next();
+            other.next();
+
+            // resultIterator = resultIterator->next;
+            // currentIterator = currentIterator->next;
+        } else if (result->iterator->isBehind(other.iterator)) {
+            result->next();
+            // resultIterator = resultIterator->next;
         }
         result->print();
         std::cout << "========================================" << std::endl;
@@ -135,6 +140,7 @@ void Matrix::deepCopy(Matrix& result) {
                                  currentItr->col);
 
         if (firstIteration) {
+            result.iterator = newNode;
             result.first = newNode;
             resultItr = newNode;
             firstIteration = false;
@@ -158,25 +164,22 @@ bool Matrix::canBeMultiplied(Matrix& other){
         return false;
     }
 }
-void Matrix::next(Node* iterator) {
-    iterator = iterator->next;
+void Matrix::next() {
+    this->iterator = iterator->next;
 }
-bool Matrix::isHead(Node* iterator) {
-    if (iterator == this->first) {
+bool Matrix::itrAtHead() {
+    if (this->iterator == this->first) {
         return true;
     } 
     return false;
 }
-void Matrix::pushBack(Node* thisIterator, Node* otherIterator) {
+void Matrix::pushBack(Node* newNode) {
     // Assertion thisIterator = NULL
-    Node* newNode = new Node(otherIterator->value, 
-                                otherIterator->row,
-                                otherIterator->col);
-    Node* previous = thisIterator->previous;
+    Node* previous = this->iterator->previous;
     previous->insertAhead(newNode);
 }
-void Matrix::pushFront(Node* thisIterator, Node* otherIterator, Node* newNode) {
-    Node* temp = thisIterator;
+void Matrix::pushFront(Node* newNode) {
+    Node* temp = this->iterator;
 
     this->first = newNode;
     newNode->next = temp;

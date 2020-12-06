@@ -15,10 +15,10 @@ class Matrix {
         bool canBeMultiplied(Matrix& other);
         void destroyNodes();
         void deepCopy(Matrix& result);
-        void next(Node* iterator);
-        bool isHead(Node* iterator);
-        void pushBack(Node* thisIterator, Node* newNode);
-        void pushFront(Node* thisIterator, Node* otherIterator, Node* newNode);
+        void next();
+        bool itrAtHead();
+        void pushBack(Node* newNode);
+        void pushFront(Node* newNode);
     
     public:
         Matrix(int rows, int cols);
