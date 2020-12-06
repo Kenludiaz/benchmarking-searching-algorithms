@@ -2,9 +2,9 @@
 
 int main() {
     Matrix test1(3, 4);
-    test1.read("sample.txt");
+    test1.read("addition.txt");
     Matrix test2(3, 4);
-    test2.read("addition.txt");
+    test2.read("addition2.txt");
     
 
     // std::cout << "This matrix is empty: " << test.isEmpty()

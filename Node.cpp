@@ -1,5 +1,5 @@
 #include "Node.h"
-
+#include <iostream>
 Node::Node(int value, int row, int col) {
     this->value = value;
     this->row = row;
@@ -40,4 +40,6 @@ bool Node::isTied(Node* other) {
 void Node::insertAhead(Node* newNode) {
     this->next = newNode;
     newNode->previous = this;
+    
 }
+

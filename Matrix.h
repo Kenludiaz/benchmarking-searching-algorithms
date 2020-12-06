@@ -19,6 +19,9 @@ class Matrix {
         bool itrAtHead();
         void pushBack(Node* newNode);
         void pushFront(Node* newNode);
+        bool end();
+        Node* lastNode();
+        void insertBehind(Node* newNode);
     
     public:
         Matrix(int rows, int cols);
