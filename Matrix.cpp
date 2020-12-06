@@ -4,6 +4,7 @@ Matrix::Matrix(int rows, int cols) {
     this->rows = rows;
     this->cols = cols;
     this->first = nullptr;
+    this->iterator = nullptr;
 }
 
 void Matrix::read(std::string fileName) {
@@ -20,6 +21,7 @@ void Matrix::read(std::string fileName) {
                 Node *node = new Node(value, i, j);
                 if(this->isEmpty()){
                     this->first = node;
+                    this->iterator = node;
                     temp = node;
                 }
                 else{

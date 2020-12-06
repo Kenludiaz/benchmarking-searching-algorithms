@@ -6,9 +6,11 @@
 class Matrix {
     private:
         Node* first;
+        Node* iterator;
         int rows;
         int cols;
-        
+    
+
         bool canBeAdded(Matrix& other);
         bool canBeMultiplied(Matrix& other);
         void destroyNodes();
