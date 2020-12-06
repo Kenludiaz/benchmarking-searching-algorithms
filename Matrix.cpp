@@ -81,7 +81,6 @@ Matrix Matrix::add(Matrix& other) {
                                     other.iterator->col);
             // When the first Matrix has no more nodes then you will always need to
             // add the remaining Nodes from the second Matrix
-
             result->pushBack(newNode);
             other.next();
 
@@ -89,7 +88,6 @@ Matrix Matrix::add(Matrix& other) {
             Node* newNode = new Node(other.iterator->value, 
                                 other.iterator->row,
                                 other.iterator->col);
-            std::cout << result->iterator->previous->value << std::endl;
             if (result->itrAtHead()) {
                 result->pushFront(newNode);
             } else {
@@ -106,10 +104,7 @@ Matrix Matrix::add(Matrix& other) {
         } else if (result->iterator->isBehind(other.iterator)) {
             result->next();
         }
-        result->print();
-        std::cout << "========================================" << std::endl;
     }
-
     return (*result);
 }
 
@@ -194,7 +189,6 @@ Node* Matrix::lastNode() {
     while(temp->next != nullptr) {
         temp = temp->next;
     }
-    std::cout << temp->value << std::endl;
     return temp;
 }
 
