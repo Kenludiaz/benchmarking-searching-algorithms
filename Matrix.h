@@ -8,6 +8,7 @@ class Matrix {
         Node* first;
         int rows;
         int cols;
+        
         bool canBeAdded(Matrix& other);
         bool canBeMultiplied(Matrix& other);
         void destroyNodes();
@@ -15,7 +16,8 @@ class Matrix {
         void next(Node* iterator);
         bool isHead(Node* iterator);
         void pushBack(Node* thisIterator, Node* newNode);
-
+        void pushFront(Node* thisIterator, Node* otherIterator, Node* newNode);
+    
     public:
         Matrix(int rows, int cols);
         ~Matrix();

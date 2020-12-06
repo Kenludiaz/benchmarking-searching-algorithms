@@ -77,22 +77,18 @@ Matrix Matrix::add(Matrix& other) {
     while(currentIterator) {
         if (!resultIterator) {
             // When the first Matrix has no more nodes
-            // Then you will alwaysneed to
-            // add the remaining Nodes
-            // From the second Matrix
+            // Then you will always need to
+            // add the remaining Nodes from the second Matrix
+
             this->pushBack(resultIterator, currentIterator);
             this->next(currentIterator);
             this->next(resultIterator);
-
         } else if (currentIterator->isBehind(resultIterator)) {
             Node* newNode = new Node(currentIterator->value, 
                                      currentIterator->row,
                                      currentIterator->col);
             if (result->isHead(resultIterator)) {
-                Node* temp = resultIterator;
-                result->first = newNode;
-                newNode->next = temp;
-                temp->previous = newNode;
+                result->pushFront(resultIterator, currentIterator, newNode);
             } else {
                 Node* temp = resultIterator;
                 resultIterator->previous->next = newNode;
@@ -176,6 +172,13 @@ void Matrix::pushBack(Node* thisIterator, Node* otherIterator) {
                                 otherIterator->col);
     Node* previous = thisIterator->previous;
     previous->insertAhead(newNode);
+}
+void Matrix::pushFront(Node* thisIterator, Node* otherIterator, Node* newNode) {
+    Node* temp = thisIterator;
+
+    this->first = newNode;
+    newNode->next = temp;
+    temp->previous = newNode;
 }
 
 Matrix::~Matrix() {
