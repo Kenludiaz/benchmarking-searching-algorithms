@@ -172,8 +172,6 @@ Matrix Matrix::multiply(Matrix& multiply){
         }
     }
     //print the matrix
-    result->print();
-    std::cout << "========================================" << std::endl;
     return(*result);
 }
 
