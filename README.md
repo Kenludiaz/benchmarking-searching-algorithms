@@ -4,8 +4,8 @@ This is a C++ application which implements Sparse Matrices
 using **Doubly Linked Lists**. This program is more memory
 efficient than it's vector counterpart.
 
-## Compiling
 ___
+## Compiling
 Please compile using the following command.
 ```bash
 g++ -std=c++11 main.cpp Matrix.cpp Node.cpp
@@ -21,8 +21,8 @@ Linux & Mac
 ./a.out
 ```
 
-## Contributions
 ___
+## Contributions
 This program was made possible by myself ([Kenludiaz](https://github.com/Kenludiaz)) and [jbinwu39](https://github.com/jbinwu39). 
 Much of it was done through pair programming. However,
 the **addition** function was primarily designed by myself and
